@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'filmographie',
         'USER':'amie',
         'PASSWORD':'toto',
-        'HOST':'194.167.107.37',
+        'HOST':'10.128.167.1',
         'PORT':'3306'
     }
 }
