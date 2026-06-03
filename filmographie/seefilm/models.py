@@ -58,12 +58,7 @@ class Films(models.Model):
     anneesortie = models.IntegerField()  # year
     affiche = models.BinaryField()
     realisateur = models.CharField(max_length=45)
-
-    idcategorie = models.ForeignKey(
-        Categories,
-        on_delete=models.SET_NULL,
-        db_column='idcategorie'
-    )
+    idcategorie = models.ForeignKey(Categories,on_delete=models.SET_NULL,null=True,blank=True,db_column='idcategorie')
 
     class Meta:
         db_table = 'films'

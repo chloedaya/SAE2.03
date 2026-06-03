@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'filmographie.wsgi.application'
+WSGI_APPLICATION = 'seefilm.wsgi.application'
 
 
 # Database
