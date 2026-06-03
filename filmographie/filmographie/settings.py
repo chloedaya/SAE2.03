@@ -80,9 +80,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'filmographie',
-        'USER':'root',
+        'USER':'amie',
         'PASSWORD':'toto',
-        'HOST':'localhost',
+        'HOST':'194.167.107.37',
         'PORT':'3306'
     }
 }
