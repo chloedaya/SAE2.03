@@ -32,3 +32,8 @@ def seecommentaires(request):
 def seefilmsacteurs(request):
     filmsacteurs = FilmsActeurs.objects.all()
     return render(request, 'seefilm/filmsacteurs.html', {'filmsacteurs': filmsacteurs})
+
+#allcommentaires
+def all(request):
+    liste_livre=list(models.Livres.objects.all())
+    return render(request,"bibliotheque/all.html",{"liste_livre":liste_livre})
