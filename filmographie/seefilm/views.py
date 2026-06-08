@@ -1,39 +1,124 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
-# Create your views here.
-from django.shortcuts import render
-from .models import Films, Acteurs, Categories, Personnes, Commentaires, FilmsActeurs
+from .forms import CategoriesForm
+from . import models
+from .models import Categories
 
 
-def seefilms(request):
-    films = Films.objects.all()
-    return render(request, 'seefilm/films.html', {'films': films})
+def ajoutCategories(request):
+    if request.method == "POST":
+        form = CategoriesForm(request.POST)
+
+        if form.is_valid():
+            categories = form.save()
+            return render(
+                request,
+                "seefilm/cataffiche.html",
+                {"categorie": categorie}
+            )
+        else:
+            return render(
+                request,
+                "seefilm/catajout.html",
+                {"form": form}
+            )
+
+    else:
+        form = CategoriesForm()
+        return render(
+            request,
+            "seefilm/catajout.html",
+            {"form": form}
+        )
 
 
-def seeacteurs(request):
-    acteurs = Acteurs.objects.all()
-    return render(request, 'seefilm/acteurs.html', {'acteurs': acteurs})
+def traitementCategorie(request):
+    cform = CategoriesForm(request.POST)
 
-def seecategories(request):
-    categories = Categories.objects.all()
-    return render(request, 'seefilm/categories.html', {'categories': categories})
+    if cform.is_valid():
+        categorie = cform.save()
+
+        return render(
+            request,
+            "seefilm/cataffiche.html",
+            {"categorie": categorie}
+        )
+
+    else:
+        return render(
+            request,
+            "seefilm/catajout.html",
+            {"form": cform}
+        )
 
 
-def seepersonnes(request):
-    personnes = Personnes.objects.all()
-    return render(request, 'seefilm/personnes.html', {'personnes': personnes})
+def allCategories(request):
+    liste_categorie = list(models.Categories.objects.all())
+
+    return render(
+        request,
+        "seefilm/allCategorie.html",
+        {"liste_categorie": liste_categorie}
+    )
 
 
-def seecommentaires(request):
-    commentaires = Commentaires.objects.all()
-    return render(request, 'seefilm/commentaires.html', {'commentaires': commentaires})
+def readCategories(request, id):
+    categorie = models.Categorie.objects.get(pk=id)
+
+    return render(
+        request,
+        "seefilm/cataffiche.html",
+        {"categorie": categorie}
+    )
 
 
-def seefilmsacteurs(request):
-    filmsacteurs = FilmsActeurs.objects.all()
-    return render(request, 'seefilm/filmsacteurs.html', {'filmsacteurs': filmsacteurs})
+def updateCategorie(request, id):
+    categorie = models.Categories.objects.get(pk=id)
 
-#allcommentaires
-def all(request):
-    liste_livre=list(models.Livres.objects.all())
-    return render(request,"bibliotheque/all.html",{"liste_livre":liste_livre})
+    cform = CategoriesForm(categorie.__dict__)
+
+    return render(
+        request,
+        "seefilm/catupdate.html",
+        {
+            "categorie": categorie,
+            "form": cform
+        }
+    )
+
+
+def updatetraitementCategorie(request, id):
+
+    if request.method == 'POST':
+
+        cform = CategoriesForm(request.POST)
+
+        if cform.is_valid():
+
+            categorie = cform.save(commit=False)
+            categorie.id = id
+            categorie.save()
+
+            return HttpResponseRedirect("/categories/")
+
+        else:
+
+            categorie = Categories.objects.get(pk=id)
+
+            return render(
+                request,
+                "seefilm/catupdate.html",
+                {
+                    "categorie": categorie,
+                    "form": cform
+                }
+            )
+
+
+def deleteCategorie(request, id):
+    categorie = Categories.objects.get(pk=id)
+
+    categorie.delete()
+
+    return HttpResponseRedirect("/categories/")

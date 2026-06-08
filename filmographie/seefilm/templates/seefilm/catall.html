@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des catégories</title>
+</head>
+<body>
+
+<a href="/seefilm/catajout">Ajouter une nouvelle catégorie</a>
+    <ul>
+        {% for l in liste_categories %}
+        <li> {{l.titre}} {{l.id}} <a href="/seefilm/catread/{{l.id}}/"> read</a> <a href="/bibliotheque/update/{{l.id}}/"> update</a>
+            <a href="/seefilm/catdelete/{{l.id}}/"> delete</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des catégories</title>
+</head>
+<body>
+
+<a href="/categorie/ajout/">Ajouter une catégorie</a>
+
+<ul>
+    {% for c in liste_categorie %}
+        <li>
+            {{ c.nom }} {{ c.id }}
+
+            <a href="/categorie/read/{{ c.id }}/">read</a>
+
+            <a href="/categorie/update/{{ c.id }}/">update</a>
+
+            <a href="/categorie/delete/{{ c.id }}/">delete</a>
+        </li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
