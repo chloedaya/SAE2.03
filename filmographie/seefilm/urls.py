@@ -2,9 +2,15 @@ from django.urls import path,include
 from . import views
 
 urlpatterns = [
-    path('films/', views.seefilms, name='seefilms'),
-    path('acteurs/', views.seeacteurs, name='seeacteurs'),
-    path('categories/', views.seecategories, name='seecategories'),
-    path('personnes/', views.seepersonnes, name='seepersonnes'),
-    path('commentaires/', views.seecommentaires, name='seecommentaires'),
+    path('/catajout/', views.ajoutCategories),
+    path('catall/', views.allCategories),
+    path('traitementCategorie/', views.traitementCategories),
+    path('categories/', views.allCategories),
+    path('cataffiche/<int:id>/', views.readCategories),
+    path('update/<int:id>/', views.updateCategories),
+    path('updatetraitement/<int:id>/', views.updatetraitementCategories),
+    path('', views.allCategories),
+    path('read/<int:id>/', views.readCategories),
+    path('delete/<int:id>/', views.deleteCategories),
+
 ]

@@ -6,10 +6,10 @@ from . import models
 class CategoriesForm(ModelForm):
     class Meta:
         model = models.Categories
-        fields = ('nom', 'descriptif')
+        fields = ('nomCat', 'descriptif')
 
         labels = {
-            'nom': _('Nom'),
+            'nomCat': _('Nom'),
             'descriptif': _('Descriptif')
         }
 
@@ -17,34 +17,34 @@ class CategoriesForm(ModelForm):
 class ActeursForm(ModelForm):
     class Meta:
         model = models.Acteurs
-        fields = ('nom', 'prenom', 'age', 'photo')
+        fields = ('nomAct', 'prenomAct', 'age', 'photo')
 
         labels = {
-            'nom': _('Nom'),
-            'prenom': _('Prénom'),
-            'age': _('Age'),
+            'nomAct': _('Nom'),
+            'prenomAct': _('Prénom'),
+            'age': _('Âge'),
             'photo': _('Photo')
         }
 
 
 class FilmForm(ModelForm):
     class Meta:
-        model = models.Film
+        model = models.Films
         fields = (
             'titre',
-            'annee_sortie',
+            'anneesortie',
             'affiche',
             'realisateur',
-            'categorie',
+            'idcategorie',
             'acteurs'
         )
 
         labels = {
             'titre': _('Titre'),
-            'annee_sortie': _('Année de sortie'),
+            'anneesortie': _('Année de sortie'),
             'affiche': _('Affiche'),
             'realisateur': _('Réalisateur'),
-            'categorie': _('Catégorie'),
+            'idcategorie': _('Catégorie'),
             'acteurs': _('Acteurs')
         }
 
@@ -54,20 +54,20 @@ class PersonnesForm(ModelForm):
         model = models.Personnes
         fields = (
             'pseudo',
-            'nom',
-            'prenom',
+            'nomPer',
+            'prenomPer',
             'mail',
             'mot_de_passe',
-            'type_personne'
+            'type'
         )
 
         labels = {
             'pseudo': _('Pseudo'),
-            'nom': _('Nom'),
-            'prenom': _('Prénom'),
+            'nomPer': _('Nom'),
+            'prenomPer': _('Prénom'),
             'mail': _('Mail'),
             'mot_de_passe': _('Mot de passe'),
-            'type_personne': _('Type')
+            'type': _('Type')
         }
 
 
@@ -75,15 +75,17 @@ class CommentairesForm(ModelForm):
     class Meta:
         model = models.Commentaires
         fields = (
-            'film',
-            'personne',
+            'idfilmsC',
+            'idpersonnesC',
             'note',
-            'commentaire'
+            'commentaire',
+            'dateCom'
         )
 
         labels = {
-            'film': _('Film'),
-            'personne': _('Personne'),
+            'idfilmsC': _('Film'),
+            'idpersonnesC': _('Personne'),
             'note': _('Note'),
-            'commentaire': _('Commentaire')
+            'commentaire': _('Commentaire'),
+            'dateCom': _('Date')
         }

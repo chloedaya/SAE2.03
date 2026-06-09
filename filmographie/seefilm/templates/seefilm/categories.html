@@ -1,13 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Catégories</title>
-    <header><h1>Catégories de film :</h1></header>
+
+    <link rel="stylesheet" href="{% static 'seefilm/style.css' %}">
 </head>
+
 <body>
-<h3>Humour :</h3>
-<p>Descriptif : Une catégorie de films conçue pour faire rire grâce à des situations cocasses, des personnages attachants et des dialogues pleins d'esprit. Parfaite pour se divertir et passer un moment convivial.</p>
+
+<header>
+    <h1>Catégories de film :</h1>
+</header>
+<a href="/seefilm/catajout">Ajouter une catégorie</a>
+<ul>
+    {% for c in liste_categorie %}
+        <li>
+            {{ c.nomCat }} ({{ c.idcategories }})
+
+            <a href="/affiche/{{ c.idcategories }}/">read</a>
+            <a href="/update/{{ c.idcategories }}/">update</a>
+            <a href="/delete/{{ c.idcategories }}/">delete</a>
+        </li>
+    {% endfor %}
+</ul>
 
 </body>
 </html>

@@ -19,7 +19,11 @@ class Acteurs(models.Model):
     nomAct = models.CharField(max_length=45)
     prenomAct = models.CharField(max_length=45)
     age = models.IntegerField(blank=True, null=True)
-    photo = models.BinaryField(blank=True, null=True)
+    photo = models.ImageField(
+        upload_to='acteurs/',
+        blank=True,
+        null=True
+    )
 
     class Meta:
         db_table = 'acteurs'
@@ -56,9 +60,12 @@ class Films(models.Model):
     idfilms = models.AutoField(primary_key=True)
     titre = models.CharField(max_length=45)
     anneesortie = models.IntegerField()  # year
-    affiche = models.BinaryField()
+    affiche = models.ImageField(
+        upload_to='affiches/'
+    )
     realisateur = models.CharField(max_length=45)
     idcategorie = models.ForeignKey(Categories,on_delete=models.SET_NULL,null=True,blank=True,db_column='idcategorie')
+    acteurs = models.CharField(max_length=45)
 
     class Meta:
         db_table = 'films'

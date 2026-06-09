@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'seefilm.apps.SeefilmConfig',
 
-    'filmographie',
+
 
 ]
 
@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'seefilm.wsgi.application'
+WSGI_APPLICATION = 'filmographie.wsgi.application'
 
 
 # Database
@@ -78,14 +78,16 @@ WSGI_APPLICATION = 'seefilm.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'filmographie',
-        'USER':'amie',
-        'PASSWORD':'toto',
-        'HOST':'10.128.167.1',
-        'PORT':'3306'
+        'ENGINE': 'django.db.backends.sqlite3',
+      'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+#       'USER':'amie',
+  #      'PASSWORD':'toto',
+   #     'HOST':'10.128.167.1',
+    #    'PORT':'3306'
+    #}
+#}
 
 
 # Password validation

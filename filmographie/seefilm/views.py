@@ -11,7 +11,7 @@ def ajoutCategories(request):
         form = CategoriesForm(request.POST)
 
         if form.is_valid():
-            categories = form.save()
+            categorie = form.save()
             return render(
                 request,
                 "seefilm/cataffiche.html",
@@ -33,7 +33,7 @@ def ajoutCategories(request):
         )
 
 
-def traitementCategorie(request):
+def traitementCategories(request):
     cform = CategoriesForm(request.POST)
 
     if cform.is_valid():
@@ -54,17 +54,17 @@ def traitementCategorie(request):
 
 
 def allCategories(request):
-    liste_categorie = list(models.Categories.objects.all())
+    liste_categorie = models.Categories.objects.all()
 
     return render(
         request,
-        "seefilm/allCategorie.html",
+        "seefilm/categories.html",
         {"liste_categorie": liste_categorie}
     )
 
 
 def readCategories(request, id):
-    categorie = models.Categorie.objects.get(pk=id)
+    categorie = models.Categories.objects.get(pk=id)
 
     return render(
         request,
@@ -73,7 +73,7 @@ def readCategories(request, id):
     )
 
 
-def updateCategorie(request, id):
+def updateCategories(request, id):
     categorie = models.Categories.objects.get(pk=id)
 
     cform = CategoriesForm(categorie.__dict__)
@@ -88,7 +88,7 @@ def updateCategorie(request, id):
     )
 
 
-def updatetraitementCategorie(request, id):
+def updatetraitementCategories(request, id):
 
     if request.method == 'POST':
 
@@ -116,8 +116,8 @@ def updatetraitementCategorie(request, id):
             )
 
 
-def deleteCategorie(request, id):
-    categorie = Categories.objects.get(pk=id)
+def deleteCategories(request, id):
+    categorie = models.Categories.objects.get(pk=id)
 
     categorie.delete()
 
