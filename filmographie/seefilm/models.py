@@ -22,7 +22,8 @@ class Acteurs(models.Model):
     photo = models.ImageField(
         upload_to='acteurs/',
         blank=True,
-        null=True
+        null=True,
+        editable=True,
     )
 
     class Meta:
@@ -61,7 +62,9 @@ class Films(models.Model):
     titre = models.CharField(max_length=45)
     anneesortie = models.IntegerField()  # year
     affiche = models.ImageField(
+        editable=True,
         upload_to='affiches/'
+
     )
     realisateur = models.CharField(max_length=45)
     idcategorie = models.ForeignKey(Categories,on_delete=models.SET_NULL,null=True,blank=True,db_column='idcategorie')

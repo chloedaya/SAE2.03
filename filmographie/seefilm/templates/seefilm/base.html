@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Filmographie{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'seefilm/style.css' %}">
+</head>
+<body>
+
+<nav>
+    <span class="brand">🎬 Filmographie</span>
+    <a href="{% url 'seefilms' %}"       class="nav-link {% block nav_films %}{% endblock %}">Films</a>
+    <a href="{% url 'seeacteurs' %}"     class="nav-link {% block nav_acteurs %}{% endblock %}">Acteurs</a>
+    <a href="{% url 'seecategories' %}"  class="nav-link {% block nav_categories %}{% endblock %}">Catégories</a>
+    <a href="{% url 'seepersonnes' %}"   class="nav-link {% block nav_personnes %}{% endblock %}">Personnes</a>
+    <a href="{% url 'seecommentaires' %}" class="nav-link {% block nav_commentaires %}{% endblock %}">Commentaires</a>
+</nav>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% block content %}{% endblock %}
+
+<footer>
+    &copy; 2025 Filmographie — SAE 2.03
+</footer>
+
+</body>
+</html>
