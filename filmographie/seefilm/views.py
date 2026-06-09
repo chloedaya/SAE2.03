@@ -68,13 +68,12 @@ def ajoutActeurs(request):
 
 def ajoutFilms(request):
     if request.method == "POST":
-
-        form = FilmsForm(request.POST)
+        form = FilmsForm(request.POST, request.FILES)
 
         if form.is_valid():
             film = form.save(commit=False)
             film.save()
-            form.save_m2m()   # ⭐ IMPORTANT
+            form.save_m2m()  # ⭐ OBLIGATOIRE pour les acteurs
 
             return render(request, "seefilm/filmaffiche.html", {
                 "film": film
@@ -86,6 +85,7 @@ def ajoutFilms(request):
     return render(request, "seefilm/filmajout.html", {
         "form": form
     })
+
 #LES ALL
 def allCommentaires(request):
     liste_commentaire = Commentaires.objects.all()

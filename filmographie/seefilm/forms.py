@@ -75,16 +75,16 @@ class CommentairesForm(ModelForm):
     class Meta:
         model = models.Commentaires
         fields = (
-            'idfilmsC',
-            'idpersonnesC',
+            'idfilms',
+            'idpersonnes',
             'note',
             'commentaire',
             'dateCom'
         )
 
         labels = {
-            'idfilmsC': _('Film'),
-            'idpersonnesC': _('Personne'),
+            'idfilms': _('Film'),
+            'idpersonnes': _('Personne'),
             'note': _('Note'),
             'commentaire': _('Commentaire'),
             'dateCom': _('Date')

@@ -87,13 +87,13 @@ class Commentaires(models.Model):
     commentaire = models.TextField()
     dateCom = models.DateTimeField()
 
-    idfilmsC = models.ForeignKey(
+    idfilms = models.ForeignKey(
         Films,
         on_delete=models.SET_NULL,
         null=True,
         db_column='idfilmsC'
     )
-    idpersonnesC = models.ForeignKey(
+    idpersonnes = models.ForeignKey(
         Personnes,
         on_delete=models.SET_NULL,
         null=True,
