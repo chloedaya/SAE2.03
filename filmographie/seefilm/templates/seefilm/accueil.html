@@ -4,29 +4,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Filmographie{% endblock %}</title>
+    <title>Accueil - Filmographie</title>
+
     <link rel="stylesheet" href="{% static 'seefilm/style.css' %}">
 </head>
+
 <body>
 
 <nav>
     <span class="brand">🎬 Filmographie</span>
-    <a href="{% url 'seeacteurs' %}"     class="nav-link {% block nav_acteurs %}{% endblock %}">Acteurs</a>
-    <a href="{% url 'seecategories' %}"  class="nav-link {% block nav_categories %}{% endblock %}">Catégories</a>
-    <a href="{% url 'seefilms' %}"  class="nav-link {% block nav_films %}{% endblock %}">Films</a>
-    <a href="{% url 'seecommentaires' %}"  class="nav-link {% block nav_commentaires %}{% endblock %}">Commentaires</a>
 
+    <a href="{% url 'seeacteurs' %}">Acteurs</a>
+    <a href="{% url 'seecategories' %}">Catégories</a>
+    <a href="{% url 'seefilms' %}">Films</a>
+    <a href="{% url 'seecommentaires' %}">Commentaires</a>
 </nav>
 
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-        <li class="{{ message.tags }}">{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
+<header class="hero">
+    <h1>Bienvenue sur Filmographie 🎬</h1>
+    <p>Explore les films, acteurs et commentaires</p>
+</header>
 
-{% block content %}{% endblock %}
+
+
+<section class="film-section">
+    <h2>🎬 Films ajoutés</h2>
+
+    <div class="film-grid">
+
+        {% for f in films %}
+        <div class="film-card">
+
+
+            {% if f.affiche %}
+                <img src="{{ f.affiche.url }}" alt="{{ f.titre }}">
+            {% else %}
+                <div class="no-image">Pas d'affiche</div>
+            {% endif %}
+
+            <h3>{{ f.titre }}</h3>
+
+            <p><strong>Acteurs :</strong></p>
+            <ul>
+                {% for a in f.acteurs.all %}
+                    <li>{{ a.nomAct }} {{ a.prenomAct }}</li>
+                {% empty %}
+                    <li>Aucun acteur</li>
+                {% endfor %}
+            </ul>
+
+        </div>
+        {% empty %}
+            <p>Aucun film disponible</p>
+        {% endfor %}
+
+    </div>
+</section>
+
 
 <footer>
     &copy; 2025 Filmographie — SAE 2.03

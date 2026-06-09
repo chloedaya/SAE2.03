@@ -2,11 +2,17 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from .forms import CategoriesForm, ActeursForm, FilmsForm, CommentairesForm
 from .models import Categories, Acteurs, Films, Commentaires
-
+from .models import Films
 
 #ACCUEIL
+
+
 def accueil(request):
-    return render(request, "seefilm/accueil.html")
+    films = Films.objects.all()
+
+    return render(request, "seefilm/accueil.html", {
+        "films": films
+    })
 #LES AJOUTS
 
 def ajoutCommentaires(request):
@@ -43,7 +49,10 @@ def ajoutCategories(request):
 
 def ajoutActeurs(request):
     if request.method == "POST":
-        form = ActeursForm(request.POST)
+        form = ActeursForm(
+            request.POST or None,
+            request.FILES or None,
+        )
 
         if form.is_valid():
             acteur = form.save()
@@ -59,13 +68,18 @@ def ajoutActeurs(request):
 
 def ajoutFilms(request):
     if request.method == "POST":
+
         form = FilmsForm(request.POST)
 
         if form.is_valid():
-            film = form.save()
+            film = form.save(commit=False)
+            film.save()
+            form.save_m2m()   # ⭐ IMPORTANT
+
             return render(request, "seefilm/filmaffiche.html", {
                 "film": film
             })
+
     else:
         form = FilmsForm()
 
@@ -131,7 +145,11 @@ def updateCommentaires(request, id):
     commentaire = get_object_or_404(Commentaires, pk=id)
 
     if request.method == "POST":
-        form = CommentairesForm(request.POST, instance=commentaire)
+        form = CommentairesForm(
+            request.POST or None,
+            request.FILES or None,
+            instance=commentaire
+        )
 
         if form.is_valid():
             form.save()
@@ -148,7 +166,11 @@ def updateFilms(request, id):
     film = get_object_or_404(Films, pk=id)
 
     if request.method == "POST":
-        form = FilmsForm(request.POST, instance=film)
+        form = FilmsForm(
+            request.POST or None,
+            request.FILES or None,
+            instance=film
+        )
 
         if form.is_valid():
             form.save()
@@ -165,7 +187,11 @@ def updateCategories(request, id):
     categorie = get_object_or_404(Categories, pk=id)
 
     if request.method == "POST":
-        form = CategoriesForm(request.POST, instance=categorie)
+        form = CategoriesForm(
+            request.POST or None,
+            request.FILES or None,
+            instance=categorie
+        )
         if form.is_valid():
             form.save()
             return HttpResponseRedirect("/categories/")
@@ -181,7 +207,8 @@ def updateActeurs(request, id):
 
     if request.method == "POST":
         form = ActeursForm(
-            request.POST,
+            request.POST or None,
+            request.FILES or None,
             instance=acteur
         )
 

@@ -10,13 +10,13 @@
 
 <h1>Ajouter un film</h1>
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
     {{ form.as_p }}
 
     <input type="submit" value="Ajouter">
 </form>
-
+<a href="/">🏠Retourner à l'accueil🏠</a>
 </body>
 </html>

@@ -63,12 +63,13 @@ class Films(models.Model):
     anneesortie = models.IntegerField()  # year
     affiche = models.ImageField(
         editable=True,
-        upload_to='affiches/'
+        upload_to='affiches/',
+        blank=True,null=True
 
     )
     realisateur = models.CharField(max_length=45)
     idcategorie = models.ForeignKey(Categories,on_delete=models.SET_NULL,null=True,blank=True,db_column='idcategorie')
-    acteurs = models.CharField(max_length=45)
+    acteurs = models.ManyToManyField('Acteurs',blank=True)
 
     class Meta:
         db_table = 'films'
@@ -77,14 +78,8 @@ class Films(models.Model):
     def __str__(self):
         return self.titre
 
-class FilmsActeurs(models.Model):
-    idfilms = models.ForeignKey(Films, on_delete=models.PROTECT, db_column='idfilms')
-    idacteurs = models.ForeignKey(Acteurs, on_delete=models.PROTECT, db_column='idacteurs')
 
-    class Meta:
-        db_table = 'films_acteurs'
-        unique_together = (('idfilms', 'idacteurs'),)
-        verbose_name_plural = "Films Acteurs"
+
 
 class Commentaires(models.Model):
     idcommentaires = models.AutoField(primary_key=True)
