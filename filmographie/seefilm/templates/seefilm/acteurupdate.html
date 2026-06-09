@@ -1,10 +1,25 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Modifier catégorie</title>
+    <link rel="stylesheet" href="{% static 'seefilm/style.css' %}">
 </head>
 <body>
+
+<h1>Modifier l'acteur</h1>
+
+<form method="post" action="/updatetraitement/{{ acteur.idacteurs }}/">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <input type="submit" value="Modifier">
+</form>
+
+<br>
+<a href="/acteurs/">Retour</a>
 
 </body>
 </html>

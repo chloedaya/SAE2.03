@@ -27,7 +27,7 @@ class ActeursForm(ModelForm):
         }
 
 
-class FilmForm(ModelForm):
+class FilmsForm(ModelForm):
     class Meta:
         model = models.Films
         fields = (

@@ -1,9 +1,30 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from .forms import CategoriesForm, ActeursForm
-from .models import Categories, Acteurs
+from .forms import CategoriesForm, ActeursForm, FilmsForm, CommentairesForm
+from .models import Categories, Acteurs, Films, Commentaires
 
+
+#ACCUEIL
+def accueil(request):
+    return render(request, "seefilm/accueil.html")
 #LES AJOUTS
+
+def ajoutCommentaires(request):
+    if request.method == "POST":
+        form = CommentairesForm(request.POST)
+
+        if form.is_valid():
+            commentaire = form.save()
+            return render(request, "seefilm/commentaireaffiche.html", {
+                "commentaire": commentaire
+            })
+    else:
+        form = CommentairesForm()
+
+    return render(request, "seefilm/commentaireajout.html", {
+        "form": form
+    })
+
 def ajoutCategories(request):
     if request.method == "POST":
         form = CategoriesForm(request.POST)
@@ -36,7 +57,36 @@ def ajoutActeurs(request):
         "form": form
     })
 
+def ajoutFilms(request):
+    if request.method == "POST":
+        form = FilmsForm(request.POST)
+
+        if form.is_valid():
+            film = form.save()
+            return render(request, "seefilm/filmaffiche.html", {
+                "film": film
+            })
+    else:
+        form = FilmsForm()
+
+    return render(request, "seefilm/filmajout.html", {
+        "form": form
+    })
 #LES ALL
+def allCommentaires(request):
+    liste_commentaire = Commentaires.objects.all()
+
+    return render(request, "seefilm/commentaires.html", {
+        "liste_commentaire": liste_commentaire
+    })
+
+def allFilms(request):
+    liste_film = Films.objects.all()
+
+    return render(request, "seefilm/films.html", {
+        "liste_film": liste_film
+    })
+
 def allCategories(request):
     liste_categorie = Categories.objects.all()
 
@@ -54,6 +104,20 @@ def allActeurs(request):
 
 #MODIFIER
 
+def readCommentaires(request, id):
+    commentaire = get_object_or_404(Commentaires, pk=id)
+
+    return render(request, "seefilm/commentaireaffiche.html", {
+        "commentaire": commentaire
+    })
+
+def readFilms(request, id):
+    film = get_object_or_404(Films, pk=id)
+
+    return render(request, "seefilm/filmaffiche.html", {
+        "film": film
+    })
+
 def readCategories(request, id):
     categorie = get_object_or_404(Categories, pk=id)
 
@@ -61,6 +125,41 @@ def readCategories(request, id):
         "categorie": categorie
     })
 
+#UPDATE
+
+def updateCommentaires(request, id):
+    commentaire = get_object_or_404(Commentaires, pk=id)
+
+    if request.method == "POST":
+        form = CommentairesForm(request.POST, instance=commentaire)
+
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("/commentaires/")
+    else:
+        form = CommentairesForm(instance=commentaire)
+
+    return render(request, "seefilm/commentaireupdate.html", {
+        "form": form,
+        "commentaire": commentaire
+    })
+
+def updateFilms(request, id):
+    film = get_object_or_404(Films, pk=id)
+
+    if request.method == "POST":
+        form = FilmsForm(request.POST, instance=film)
+
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("/films/")
+    else:
+        form = FilmsForm(instance=film)
+
+    return render(request, "seefilm/filmupdate.html", {
+        "form": form,
+        "film": film
+    })
 
 def updateCategories(request, id):
     categorie = get_object_or_404(Categories, pk=id)
@@ -103,6 +202,17 @@ def updateActeurs(request, id):
     )
 
 #DELETE
+def deleteCommentaires(request, id):
+    commentaire = get_object_or_404(Commentaires, pk=id)
+    commentaire.delete()
+    return HttpResponseRedirect("/commentaires/")
+
+
+def deleteFilms(request, id):
+    film = get_object_or_404(Films, pk=id)
+    film.delete()
+    return HttpResponseRedirect("/films/")
+
 def deleteCategories(request, id):
     categorie = get_object_or_404(Categories, pk=id)
     categorie.delete()
@@ -208,3 +318,4 @@ def updatetraitementActeurs(request, id):
                     "form": aform
                 }
             )
+

@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ film.titre }}</title>
+    <link rel="stylesheet" href="{% static 'seefilm/style.css' %}">
+</head>
+<body>
+
+<h1>{{ film.titre }}</h1>
+
+<h3>Acteurs :</h3>
+
+<ul>
+{% for a in film.acteurs.all %}
+    <li>
+        {{ a.nomAct }} {{ a.prenomAct }}
+    </li>
+{% empty %}
+    <li>Aucun acteur</li>
+{% endfor %}
+</ul>
+
+<a href="/films/">Retour</a>
+
+</body>
+</html>

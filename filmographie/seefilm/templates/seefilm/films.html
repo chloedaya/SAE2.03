@@ -1,11 +1,32 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Films</title>
-    <link rel="stylesheet" href="stle.css">
+
+    <link rel="stylesheet" href="{% static 'seefilm/style.css' %}">
 </head>
+
 <body>
+
+<h1>Films</h1>
+
+<a href="/filmajout/">➕ Ajouter un film</a>
+
+<ul>
+    {% for f in liste_film %}
+        <li>
+            {{ f.titre }}
+
+            <a href="/filmaffiche/{{ f.idfilms }}/">read</a>
+            <a href="/filmupdate/{{ f.idfilms }}/">update</a>
+            <a href="/filmdelete/{{ f.idfilms }}/">delete</a>
+        </li>
+    {% empty %}
+        <li>Aucun film disponible</li>
+    {% endfor %}
+</ul>
 
 </body>
 </html>

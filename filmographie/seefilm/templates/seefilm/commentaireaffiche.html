@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Commentaire</title>
+
+    <link rel="stylesheet" href="{% static 'seefilm/style.css' %}">
+</head>
+
+<body>
+
+<h1>Détail du commentaire</h1>
+
+<p><strong>Contenu :</strong> {{ commentaire.contenu }}</p>
+
+<p><strong>ID :</strong> {{ commentaire.idcommentaires }}</p>
+
+<a href="/commentaires/">Retour à la liste</a>
+
+</body>
+</html>

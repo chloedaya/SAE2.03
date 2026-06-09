@@ -1,22 +1,27 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Ajouter un acteur</title>
+    <title>Modifier film</title>
+
     <link rel="stylesheet" href="{% static 'seefilm/style.css' %}">
 </head>
+
 <body>
 
-<h1>Ajouter un acteur</h1>
+<h1>Modifier le film : {{ film.titre }}</h1>
 
 <form method="post">
     {% csrf_token %}
-
     {{ form.as_p }}
 
-    <input type="submit" value="Ajouter">
+    <button type="submit">Modifier</button>
 </form>
+
+<br>
+
+<a href="/films/">Retour à la liste des films</a>
 
 </body>
 </html>

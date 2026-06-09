@@ -1,17 +1,38 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta charset="UTF-8">
-	<title>Acteurs</title>
-	<link rel="stylesheet" href="stle.css">
+    <meta charset="UTF-8">
+    <title>Acteurs</title>
+    <link rel="stylesheet" href="{% static 'seefilm/style.css' %}">
 </head>
 
 <body>
-	<header>
-		<h1>Liste des acteurs :
-		</h1>
-	</header>
-</body>
 
+<h1>Acteurs</h1>
+
+<a href="/acteurajout/">➕ Ajouter un acteur</a>
+
+<ul>
+    {% for a in liste_acteur %}
+        <li>
+    {{ a.nomAct }} {{ a.prenomAct }}
+    - {{ a.age }} ans
+
+    {% if a.photo %}
+        <br>
+        <img src="{{ a.photo.url }}" width="100">
+    {% endif %}
+
+    <br>
+    <a href="/acteuraffiche/{{ a.idacteurs }}/">Lire</a>
+    <a href="/acteurupdate/{{ a.idacteurs }}/">Modifier</a>
+    <a href="/acteurdelete/{{ a.idacteurs }}/">Supprimer</a>
+</li>
+    {% empty %}
+        <li>Aucun acteur disponible</li>
+    {% endfor %}
+</ul>
+<a href="/">🏠Retourner à l'accueil🏠</a>
+</body>
 </html>

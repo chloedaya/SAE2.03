@@ -1,22 +1,32 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Commentaires</title>
-    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="{% static 'seefilm/style.css' %}">
 </head>
+
 <body>
-	<form action="/seefilm/films/" method="GET">
-			<label FOR "name">Nom du film :</label>
-			<input TYPE="text" ID="nom" NAME="Nom du film">
-        #il faut un menu déroulant
 
-            <label FOR "commentaires">Commentaires:</label>
-            <input TYPE="text" ID="commentaires" NAME="Commentaires">
+<h1>Commentaires</h1>
 
+<a href="/commentaireajout/">➕ Ajouter un commentaire</a>
 
+<ul>
+    {% for c in liste_commentaire %}
+        <li>
+            {{ c.contenu }}
 
-			<input type="submit" value="Poster mon commentaire"
-	</form>
+            <a href="/commentaireaffiche/{{ c.idcommentaires }}/">read</a>
+            <a href="/commentaireupdate/{{ c.idcommentaires }}/">update</a>
+            <a href="/commentairedelete/{{ c.idcommentaires }}/">delete</a>
+        </li>
+    {% empty %}
+        <li>Aucun commentaire disponible</li>
+    {% endfor %}
+</ul>
+
 </body>
 </html>
