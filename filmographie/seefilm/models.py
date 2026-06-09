@@ -91,13 +91,13 @@ class Commentaires(models.Model):
         Films,
         on_delete=models.SET_NULL,
         null=True,
-        db_column='idfilmsC'
+        db_column='idfilms'
     )
     idpersonnes = models.ForeignKey(
         Personnes,
         on_delete=models.SET_NULL,
         null=True,
-        db_column='idpersonnesC'
+        db_column='idpersonnes'
     )
 
     class Meta:
