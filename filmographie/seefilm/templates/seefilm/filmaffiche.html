@@ -19,6 +19,9 @@
 {% empty %}
     <li>Aucun acteur</li>
 {% endfor %}
+    {% if film.affiche %}
+    <img src="{{ film.affiche.url }}" width="200">
+{% endif %}
 </ul>
 
 <a href="/films/">Retour</a>
