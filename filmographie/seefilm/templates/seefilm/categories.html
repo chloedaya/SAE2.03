@@ -4,25 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Catégories</title>
-
     <link rel="stylesheet" href="{% static 'seefilm/style.css' %}">
 </head>
 
 <body>
 
-<header>
-    <h1>Catégories de film :</h1>
-</header>
-<a href="/seefilm/catajout">Ajouter une catégorie</a>
+<h1>Catégories de films</h1>
+
+<a href="/catajout/">➕ Ajouter une catégorie</a>
+
 <ul>
     {% for c in liste_categorie %}
         <li>
-            {{ c.nomCat }} ({{ c.idcategories }})
+            {{ c.nomCat }} (ID: {{ c.idcategories }})
 
-            <a href="/affiche/{{ c.idcategories }}/">read</a>
-            <a href="/update/{{ c.idcategories }}/">update</a>
-            <a href="/delete/{{ c.idcategories }}/">delete</a>
+            <a href="/cataffiche/{{ c.idcategories }}/">Lire</a>
+            <a href="/update/{{ c.idcategories }}/">Modifier</a>
+            <a href="/delete/{{ c.idcategories }}/">Supprimer</a>
         </li>
+    {% empty %}
+        <li>Aucune catégorie disponible</li>
     {% endfor %}
 </ul>
 

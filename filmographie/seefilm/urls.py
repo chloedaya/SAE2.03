@@ -1,16 +1,18 @@
 from django.urls import path,include
 from . import views
 
-urlpatterns = [
-    path('/catajout/', views.ajoutCategories),
-    path('catall/', views.allCategories),
-    path('traitementCategorie/', views.traitementCategories),
-    path('categories/', views.allCategories),
-    path('cataffiche/<int:id>/', views.readCategories),
-    path('update/<int:id>/', views.updateCategories),
-    path('updatetraitement/<int:id>/', views.updatetraitementCategories),
-    path('', views.allCategories),
-    path('read/<int:id>/', views.readCategories),
-    path('delete/<int:id>/', views.deleteCategories),
 
+urlpatterns = [
+    path('catajout/', views.ajoutCategories, name='catajout'),
+    path('traitementCategorie/', views.traitementCategories, name='traitementCategorie'),
+
+    path('categories/', views.allCategories, name='categories'),
+
+    path('cataffiche/<int:id>/', views.readCategories, name='cataffiche'),
+    path('update/<int:id>/', views.updateCategories, name='updateCategorie'),
+    path('updatetraitement/<int:id>/', views.updatetraitementCategories),
+
+    path('delete/<int:id>/', views.deleteCategories, name='deleteCategorie'),
+
+    path('', views.allCategories),
 ]

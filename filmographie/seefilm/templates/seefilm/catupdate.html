@@ -3,20 +3,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ajouter une catégorie</title>
+    <title>Modifier catégorie</title>
     <link rel="stylesheet" href="{% static 'seefilm/style.css' %}">
 </head>
 <body>
 
-<h1>Ajouter une catégorie</h1>
+<h1>Modifier la catégorie</h1>
 
-<form method="post">
+<form method="post" action="/updatetraitement/{{ categorie.idcategories }}/">
     {% csrf_token %}
 
     {{ form.as_p }}
 
-    <input type="submit" value="Ajouter">
+    <input type="submit" value="Modifier">
 </form>
+
+<br>
+<a href="/categories/">Retour</a>
 
 </body>
 </html>
