@@ -1,11 +1,36 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Personnes</title>
-    <link rel="stylesheet" href="stle.css">
+    <link rel="stylesheet" href="{% static 'seefilm/style.css' %}">
 </head>
+
 <body>
+
+<h1>Liste des personnes</h1>
+
+<a href="/personneajout/">➕ Ajouter une personne</a>
+
+<ul>
+    {% for p in liste_personne %}
+        <li>
+            {{ p.pseudo }} ({{ p.prenomPer }} {{ p.nomPer }})
+            - {{ p.mail }}
+            - Type : {{ p.type }}
+            - ID : {{ p.idpersonnes }}
+
+            <a href="/personneaffiche/{{ p.idpersonnes }}/">Lire</a>
+            <a href="/personneupdate/{{ p.idpersonnes }}/">Modifier</a>
+            <a href="/personnedelete/{{ p.idpersonnes }}/">Supprimer</a>
+        </li>
+    {% empty %}
+        <li>Aucune personne enregistrée</li>
+    {% endfor %}
+</ul>
+
+<a href="/">🏠 Retourner à l'accueil 🏠</a>
 
 </body>
 </html>

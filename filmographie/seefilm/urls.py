@@ -45,6 +45,8 @@ urlpatterns = [
     path('commentairedelete/<int:id>/', views.deleteCommentaires),
 
 
+
+
 ]
 
 
